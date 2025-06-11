@@ -155,7 +155,7 @@ class OpenCVCamera(Camera):
         # blocking in multi-threaded applications, especially during data collection.
         cv2.setNumThreads(1)
 
-        self.videocapture = cv2.VideoCapture(self.index_or_path, self.backend)
+        self.videocapture = cv2.VideoCapture(self.index_or_path, cv2.CAP_MSMF)
 
         if not self.videocapture.isOpened():
             self.videocapture.release()
@@ -194,15 +194,18 @@ class OpenCVCamera(Camera):
                                      to configure settings.
         """
         if not self.is_connected:
-            raise DeviceNotConnectedError(f"Cannot configure settings for {self} as it is not connected.")
+            raise DeviceNotConnectedError(
+                f"Cannot configure settings for {self} as it is not connected.")
 
         if self.fps is None:
             self.fps = self.videocapture.get(cv2.CAP_PROP_FPS)
         else:
             self._validate_fps()
 
-        default_width = int(round(self.videocapture.get(cv2.CAP_PROP_FRAME_WIDTH)))
-        default_height = int(round(self.videocapture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+        default_width = int(
+            round(self.videocapture.get(cv2.CAP_PROP_FRAME_WIDTH)))
+        default_height = int(
+            round(self.videocapture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
 
         if self.width is None or self.height is None:
             self.width, self.height = default_width, default_height
@@ -220,21 +223,26 @@ class OpenCVCamera(Camera):
         actual_fps = self.videocapture.get(cv2.CAP_PROP_FPS)
         # Use math.isclose for robust float comparison
         if not success or not math.isclose(self.fps, actual_fps, rel_tol=1e-3):
-            raise RuntimeError(f"{self} failed to set fps={self.fps} ({actual_fps=}).")
+            raise RuntimeError(
+                f"{self} failed to set fps={self.fps} ({actual_fps=}).")
 
     def _validate_width_and_height(self) -> None:
         """Validates and sets the camera's frame capture width and height."""
 
-        width_success = self.videocapture.set(cv2.CAP_PROP_FRAME_WIDTH, float(self.capture_width))
-        height_success = self.videocapture.set(cv2.CAP_PROP_FRAME_HEIGHT, float(self.capture_height))
+        width_success = self.videocapture.set(
+            cv2.CAP_PROP_FRAME_WIDTH, float(self.capture_width))
+        height_success = self.videocapture.set(
+            cv2.CAP_PROP_FRAME_HEIGHT, float(self.capture_height))
 
-        actual_width = int(round(self.videocapture.get(cv2.CAP_PROP_FRAME_WIDTH)))
+        actual_width = int(
+            round(self.videocapture.get(cv2.CAP_PROP_FRAME_WIDTH)))
         if not width_success or self.capture_width != actual_width:
             raise RuntimeError(
                 f"{self} failed to set capture_width={self.capture_width} ({actual_width=}, {width_success=})."
             )
 
-        actual_height = int(round(self.videocapture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+        actual_height = int(
+            round(self.videocapture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
         if not height_success or self.capture_height != actual_height:
             raise RuntimeError(
                 f"{self} failed to set capture_height={self.capture_height} ({actual_height=}, {height_success=})."
@@ -256,7 +264,8 @@ class OpenCVCamera(Camera):
         found_cameras_info = []
 
         if platform.system() == "Linux":
-            possible_paths = sorted(Path("/dev").glob("video*"), key=lambda p: p.name)
+            possible_paths = sorted(
+                Path("/dev").glob("video*"), key=lambda p: p.name)
             targets_to_scan = [str(p) for p in possible_paths]
         else:
             targets_to_scan = list(range(MAX_OPENCV_INDEX))
@@ -358,7 +367,8 @@ class OpenCVCamera(Camera):
             )
 
         if c != 3:
-            raise RuntimeError(f"{self} frame channels={c} do not match expected 3 channels (RGB/BGR).")
+            raise RuntimeError(
+                f"{self} frame channels={c} do not match expected 3 channels (RGB/BGR).")
 
         processed_image = image
         if requested_color_mode == ColorMode.RGB:
@@ -391,7 +401,8 @@ class OpenCVCamera(Camera):
             except DeviceNotConnectedError:
                 break
             except Exception as e:
-                logger.warning(f"Error reading frame in background thread for {self}: {e}")
+                logger.warning(
+                    f"Error reading frame in background thread for {self}: {e}")
 
     def _start_read_thread(self) -> None:
         """Starts or restarts the background read thread if it's not running."""
@@ -401,7 +412,8 @@ class OpenCVCamera(Camera):
             self.stop_event.set()
 
         self.stop_event = Event()
-        self.thread = Thread(target=self._read_loop, args=(), name=f"{self}_read_loop")
+        self.thread = Thread(target=self._read_loop,
+                             args=(), name=f"{self}_read_loop")
         self.thread.daemon = True
         self.thread.start()
 
@@ -455,7 +467,8 @@ class OpenCVCamera(Camera):
             self.new_frame_event.clear()
 
         if frame is None:
-            raise RuntimeError(f"Internal error: Event set but no frame available for {self}.")
+            raise RuntimeError(
+                f"Internal error: Event set but no frame available for {self}.")
 
         return frame
 
