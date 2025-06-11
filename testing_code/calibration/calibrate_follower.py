@@ -8,6 +8,6 @@ config = SO101FollowerConfig(
 )
 
 follower = SO101Follower(config)
-follower.connect()
-# follower.calibrate()
+follower.connect(calibrate=False)
+follower.calibrate()
 follower.disconnect()

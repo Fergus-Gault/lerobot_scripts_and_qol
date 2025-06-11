@@ -8,6 +8,6 @@ config = SO101LeaderConfig(
 )
 
 leader = SO101Leader(config)
-leader.connect()
-# leader.calibrate()
+leader.connect(calibrate=False)
+leader.calibrate()
 leader.disconnect()
