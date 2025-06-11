@@ -4,7 +4,7 @@ from lerobot.teleoperate import teleoperate, TeleoperateConfig
 from lerobot.common.cameras.opencv import OpenCVCameraConfig
 from lerobot.common.cameras.configs import ColorMode
 
-from ..variables import *
+from testing_code import *
 
 camera_config = {
     "front": OpenCVCameraConfig(
