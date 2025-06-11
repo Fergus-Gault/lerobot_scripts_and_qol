@@ -9,6 +9,7 @@ from lerobot.scripts.train import train
 
 pretrained_config = ACTConfig(
     device="cuda",
+    use_amp=True,
 )
 
 dataset_config = DatasetConfig(
