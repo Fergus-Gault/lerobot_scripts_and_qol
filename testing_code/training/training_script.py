@@ -6,6 +6,7 @@ from lerobot.common.policies import ACTConfig
 
 from lerobot.scripts.train import train
 
+from pathlib import Path
 
 pretrained_config = ACTConfig(
     device="cuda",
@@ -19,7 +20,7 @@ dataset_config = DatasetConfig(
 train_config = TrainPipelineConfig(
     dataset=dataset_config,
     policy=pretrained_config,
-    output_dir=OUTPUT_DIR,
+    output_dir=Path(OUTPUT_DIR),
     job_name=JOB_NAME,
     batch_size=10,
     num_workers=4,

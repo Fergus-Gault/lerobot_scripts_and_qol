@@ -21,5 +21,5 @@ DISPLAY = True
 PUSH_TO_HUB = True
 
 # Training variables
-OUTPUT_DIR = "outputs/train/lego_wheel"
+OUTPUT_DIR = "./outputs/train/lego_wheel"
 JOB_NAME = "lego_wheel_training"
