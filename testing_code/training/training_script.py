@@ -20,6 +20,9 @@ train_config = TrainPipelineConfig(
     policy=pretrained_config,
     output_dir=OUTPUT_DIR,
     job_name=JOB_NAME,
+    batch_size=10,
+    num_workers=4,
+    steps=1000,
 )
 
 train(train_config)
