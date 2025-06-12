@@ -14,10 +14,10 @@ camera_config = {
         fps=30,
         color_mode=ColorMode.RGB,
     ),
-    "laptop_cam": OpenCVCameraConfig(
-        index_or_path=0,
-        width=640,
-        height=480,
+    "phone": OpenCVCameraConfig(
+        index_or_path=2,
+        width=1280,
+        height=720,
         fps=30,
         color_mode=ColorMode.RGB,
     ),

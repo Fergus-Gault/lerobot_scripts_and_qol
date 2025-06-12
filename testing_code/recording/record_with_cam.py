@@ -10,10 +10,16 @@ from testing_code import *
 camera_config = {
     "attached_cam": OpenCVCameraConfig(
         index_or_path=1,
-        width=WIDTH,
-        height=HEIGHT,
+        width=640,
+        height=480,
         fps=FPS,
-    )
+    ),
+    "phone_cam": OpenCVCameraConfig(
+        index_or_path=2,
+        width=1280,
+        height=720,
+        fps=FPS,
+    ),
 }
 
 follower_config = SO101FollowerConfig(
@@ -42,7 +48,7 @@ record_config = RecordConfig(
     robot=follower_config,
     teleop=leader_config,
     display_data=DISPLAY,
-    resume=False,  # Change this to True to resume an existing recording
+    resume=True,  # Change this to True to resume an existing recording
 )
 
 record(record_config)
