@@ -3,6 +3,7 @@ from lerobot.record import RecordConfig, DatasetRecordConfig, record
 from lerobot.common.robots.so101_follower import SO101FollowerConfig
 from lerobot.common.teleoperators.so101_leader import SO101LeaderConfig
 from lerobot.common.cameras.opencv.configuration_opencv import OpenCVCameraConfig
+from lerobot.common.cameras.configs import OpenCVApi
 
 from testing_code import *
 
@@ -13,12 +14,14 @@ camera_config = {
         width=640,
         height=480,
         fps=FPS,
+        backend=OpenCVApi.CAP_MSMF,
     ),
     "phone_cam": OpenCVCameraConfig(
         index_or_path=2,
         width=1280,
         height=720,
         fps=FPS,
+        backend=OpenCVApi.CAP_MSMF,
     ),
 }
 

@@ -2,7 +2,7 @@ from lerobot.common.robots.so101_follower import SO101FollowerConfig, SO101Follo
 from lerobot.common.teleoperators.so101_leader import SO101LeaderConfig, SO101Leader
 from lerobot.teleoperate import teleoperate, TeleoperateConfig
 from lerobot.common.cameras.opencv import OpenCVCameraConfig
-from lerobot.common.cameras.configs import ColorMode
+from lerobot.common.cameras.configs import ColorMode, OpenCVApi
 
 from testing_code import *
 
@@ -13,6 +13,7 @@ camera_config = {
         height=480,
         fps=30,
         color_mode=ColorMode.RGB,
+        backend=OpenCVApi.CAP_MSMF,
     ),
     "phone": OpenCVCameraConfig(
         index_or_path=2,
@@ -20,6 +21,7 @@ camera_config = {
         height=720,
         fps=30,
         color_mode=ColorMode.RGB,
+        backend=OpenCVApi.CAP_MSMF,
     ),
 }
 

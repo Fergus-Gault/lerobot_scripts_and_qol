@@ -3,8 +3,8 @@ from lerobot.common.robots.so101_follower import SO101FollowerConfig, SO101Follo
 from testing_code import *
 
 config = SO101FollowerConfig(
-    port=FOLLOWER_PORT,
-    id=FOLLOWER_ID,
+    port="COM7",
+    id="black_follower",
 )
 
 follower = SO101Follower(config)
