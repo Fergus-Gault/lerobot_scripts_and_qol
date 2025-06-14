@@ -1,5 +1,8 @@
-from datasets import load_dataset
+from lerobot.common.datasets.lerobot_dataset import LeRobotDataset
 from testing_code import *
 
-dataset = load_dataset(REPO_ID)
-dataset.push_to_hub(repo_id=REPO_ID, private=True)
+
+dataset = LeRobotDataset(
+    repo_id=REPO_ID,
+)
+dataset.push_to_hub(private=True)
