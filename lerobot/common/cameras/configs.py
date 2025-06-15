@@ -26,18 +26,6 @@ class ColorMode(str, Enum):
     BGR = "bgr"
 
 
-class OpenCVApi(int, Enum):
-    ANY = 0
-    V4L2 = 1
-    GSTREAMER = 2
-    FFMPEG = 3
-    OPENCV = 4
-    DSHOW = 5
-    AVFOUNDATION = 6
-    MSMF = 7
-    WINRT = 8
-
-
 class Cv2Rotation(int, Enum):
     NO_ROTATION = 0
     ROTATE_90 = 90

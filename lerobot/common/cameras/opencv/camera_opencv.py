@@ -111,7 +111,6 @@ class OpenCVCamera(Camera):
         self.fps = config.fps
         self.color_mode = config.color_mode
         self.warmup_s = config.warmup_s
-        self.backend: int = config.backend
 
         self.videocapture: cv2.VideoCapture | None = None
 
@@ -155,6 +154,9 @@ class OpenCVCamera(Camera):
         # blocking in multi-threaded applications, especially during data collection.
         cv2.setNumThreads(1)
 
+        self.videocapture = cv2.VideoCapture(self.index_or_path)
+        self.backend = self.videocapture.getBackendName()
+        self.videocapture.release()
         self.videocapture = cv2.VideoCapture(self.index_or_path, self.backend)
 
         if not self.videocapture.isOpened():

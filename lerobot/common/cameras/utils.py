@@ -54,12 +54,3 @@ def get_cv2_rotation(rotation: Cv2Rotation) -> int | None:
         return cv2.ROTATE_90_COUNTERCLOCKWISE
     else:
         return None
-
-
-def get_cv2_backend() -> int:
-    import cv2
-
-    if platform.system() == "Windows":
-        return cv2.CAP_MSMF
-    else:
-        return cv2.CAP_ANY

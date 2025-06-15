@@ -16,7 +16,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import cv2
 
-from ..configs import CameraConfig, ColorMode, Cv2Rotation, OpenCVApi
+from ..configs import CameraConfig, ColorMode, Cv2Rotation
 
 
 @CameraConfig.register_subclass("opencv")
@@ -56,7 +56,6 @@ class OpenCVCameraConfig(CameraConfig):
     color_mode: ColorMode = ColorMode.RGB
     rotation: Cv2Rotation = Cv2Rotation.NO_ROTATION
     warmup_s: int = 1
-    backend: OpenCVApi = OpenCVApi.ANY
 
     def __post_init__(self):
         if self.color_mode not in (ColorMode.RGB, ColorMode.BGR):
